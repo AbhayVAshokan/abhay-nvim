@@ -15,6 +15,8 @@ return {
   { import = "astrocommunity.pack.eslint" },
   { import = "astrocommunity.pack.prettier" },
   { import = "astrocommunity.pack.tailwindcss" },
+  { import = "astrocommunity.programming-language-support.csv-vim" },
+  { import = "astrocommunity.pack.cpp" },
 
   -- ui improvements
   { import = "astrocommunity.bars-and-lines.dropbar-nvim" },
@@ -24,7 +26,9 @@ return {
   { import = "astrocommunity.fuzzy-finder.telescope-nvim" },
   { import = "astrocommunity.git.git-blame-nvim" },
   { import = "astrocommunity.git.diffview-nvim" },
-  -- { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
+  { import = "astrocommunity.search.grug-far-nvim" },
+  { import = "astrocommunity.pack.full-dadbod" },
+  { import = "astrocommunity.utility.noice-nvim" },
 
   -- motion
   { import = "astrocommunity.motion.nvim-surround" },
@@ -34,6 +38,7 @@ return {
   { import = "astrocommunity.scrolling.nvim-scrollbar" },
   { import = "astrocommunity.scrolling.satellite-nvim" },
 
-  -- test
-  { import = "astrocommunity.test.neotest" },
+  { -- neotest
+    import = "astrocommunity.test.neotest",
+  },
 }
