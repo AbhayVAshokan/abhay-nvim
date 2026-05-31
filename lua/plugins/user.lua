@@ -70,6 +70,22 @@ return {
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
 
+  -- ===========================================================================
+  -- TEMPORARILY DISABLED: aerial.nvim - incompatible with Neovim 0.12
+  -- Issue: https://github.com/stevearc/aerial.nvim/issues/506
+  -- Error: "attempt to call method 'start' (a nil value)" in treesitter backend
+  -- 
+  -- TO RE-ENABLE: Once aerial.nvim supports Neovim 0.12, uncomment the block below
+  -- and comment out or remove the enabled = false line
+  -- ===========================================================================
+  {
+    "stevearc/aerial.nvim",
+    enabled = false, -- TODO: Re-enable when Neovim 0.12 support is added
+  },
+  -- Alternative for breadcrumbs: dropbar.nvim (already installed)
+  -- Alternative for symbol outline: :Telescope lsp_document_symbols
+  -- ===========================================================================
+
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
     "L3MON4D3/LuaSnip",

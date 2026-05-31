@@ -35,6 +35,47 @@ return {
           end,
           desc = "Find word under the cursor excpet inside the spec folder",
         },
+        ["<leader>fd"] = {
+          function()
+            local word = vim.fn.expand "<cword>"
+            local patterns = { "def " .. word, "def self\\." .. word }
+            local results = {}
+            for _, pattern in ipairs(patterns) do
+              local lines = vim.fn.systemlist("rg --vimgrep " .. vim.fn.shellescape(pattern) .. " .")
+              if #lines > 0 then
+                results = lines
+                break
+              end
+            end
+            if #results == 0 then
+              vim.notify("No definition found for: " .. word, vim.log.levels.WARN)
+              return
+            end
+            if #results == 1 then
+              local file, lnum, col = results[1]:match "^(.-):(%d+):(%d+):"
+              if file then
+                vim.cmd("edit " .. vim.fn.fnameescape(file))
+                vim.api.nvim_win_set_cursor(0, { tonumber(lnum), tonumber(col) - 1 })
+              end
+              return
+            end
+            local qf_items = {}
+            for _, line in ipairs(results) do
+              local file, lnum, col, text = line:match "^(.-):(%d+):(%d+):(.*)"
+              if file then
+                table.insert(qf_items, {
+                  filename = file,
+                  lnum = tonumber(lnum),
+                  col = tonumber(col),
+                  text = text,
+                })
+              end
+            end
+            vim.fn.setqflist(qf_items, "r")
+            require("telescope.builtin").quickfix()
+          end,
+          desc = "Find Ruby method definition",
+        },
         -- Leader zs: Replay the last callout in Zuora for my user id.
         ["<leader>zl"] = {
           function()
@@ -58,3 +99,4 @@ return {
     },
   },
 }
+
